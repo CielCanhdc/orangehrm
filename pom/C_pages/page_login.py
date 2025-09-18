@@ -8,15 +8,15 @@ class PageLogin(BasePage):
         super().__init__(driver)
         self.driver = driver
 
-    def enter_username(self, username: str) -> Self:
+    def enter_username(self, username: str):
         self.find_element_heavy(locators.loc_username).send_keys(username)
         return self
 
-    def enter_password(self, password: str) -> Self:
+    def enter_password(self, password: str):
         self.find_element_light(locators.loc_password).send_keys(password)
         return self
 
-    def click_login(self) -> Self:
+    def click_login(self):
         self.find_element_light(locators.loc_login).click()
         return self
 

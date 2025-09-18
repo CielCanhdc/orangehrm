@@ -24,7 +24,7 @@ class BasePage(ABC):
         else:
             return By.ID, locator
 
-    def goto(self, url: str) -> None:
+    def goto(self, url: str = '') -> None:
         if not url:
             url = Config.BASE_URL
         else:

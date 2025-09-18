@@ -6,7 +6,7 @@ from pom.D_steps.step_login import StepLogin
 
 class TestLogin(BaseTest):
 
-    @logg
+    # @logg
     @pytest.mark.parametrize('username, passwd', [('Admin', 'admin123')])
     def test_login_successfully(self, username, passwd):
         self.login\
@@ -15,7 +15,7 @@ class TestLogin(BaseTest):
             .click_login()\
             .verify_login_successfully()
 
-    @logg
+    # @logg
     @pytest.mark.parametrize('username, passwd, message', [('Admin', 'wrong pw', 'Invalid credential')])
     def test_login_invalid(self, username, passwd, message):
         self.login\
