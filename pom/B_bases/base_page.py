@@ -14,6 +14,7 @@ class BasePage(ABC):
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, Config.EXPLICIT_WAIT_TIME)
+        self.response = {}
 
     @staticmethod
     def classify_locator(locator: str) -> tuple:

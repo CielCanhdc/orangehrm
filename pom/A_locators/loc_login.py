@@ -1,3 +1,19 @@
+"""
+Naming convention: loc_<type>_<variable-name>
+frm  Form
+mnu  Form menu
+cmd  Command button
+chk  Check button
+opt  Radio button
+lbl  Text label
+txt  Text edit box
+pb   Picture box
+pic  Picture
+lst  List box
+cbo  Combo box
+tmr  Timer
+"""
+
 from config import Config
 
 
