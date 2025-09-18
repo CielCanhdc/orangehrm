@@ -2,7 +2,7 @@ class Config:
     BASE_URL = 'https://opensource-demo.orangehrmlive.com/'
     BROWSERS = ['chrome', 'firefox']
     HEADLESS = False
-    ENV_LOCATORS = 'dev'  # Default locator by environment
+    ENV_LOCATORS = ''  # Locator by environment: Default | Staging based on class name in A_locator classes
 
 
     RETRY_FIND_ELEMENT_TIMES = 3  # second. use in base page
@@ -13,6 +13,7 @@ class Config:
 
 class Routes:
     LOGIN = 'web/index.php/auth/login'
+    DASHBOARD = 'web/index.php/dashboard/index'
 
 
 class Grid:

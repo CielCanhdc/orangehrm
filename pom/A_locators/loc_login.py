@@ -1,0 +1,29 @@
+from config import Config
+
+
+class Default:
+    loc_username = 'input[name="username"]'
+    loc_username_bak_1 = '[placeholder="Username"]'
+
+    loc_password = 'input[name="password"]'
+    loc_login = '.orangehrm-login-button'
+
+    loc_login_error_msg = '.oxd-alert-content--error'
+    loc_home_page = '.orangehrm-upgrade-layout'
+
+
+class Staging(Default):
+    """
+    Override the locators changed with default locators.
+    Example:
+        loc_username = '[placeholder="Username"]'
+
+        It will detect automatically to override loc_username of Staging env
+    """
+    loc_username = '[placeholder="Username"]'
+
+
+if Config.ENV_LOCATORS.lower() == 'staging':
+    locators = Staging()
+else:
+    locators = Default()
