@@ -1,5 +1,5 @@
 from pom.C_pages import *
 
 
-class CommonPage(BasePage):
+class PageCommon(BasePage):
     pass
