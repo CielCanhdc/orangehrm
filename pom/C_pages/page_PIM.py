@@ -6,7 +6,7 @@ class PagePIM(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-
+        self.response = {}  # Update this variable if you want return value
 
     def enter_employee_firstname(self, firstname: str = None):
         firstname = 'fake' if not firstname else firstname

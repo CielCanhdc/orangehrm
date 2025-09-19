@@ -6,6 +6,7 @@ class PageCommon(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+        self.response = {}  # Update this variable if you want return value
 
     def click_menu_by_name(self, menu_item: str):
         self.find_element_heavy(locators.loc_mnu_menuItem % menu_item).click()
