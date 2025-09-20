@@ -8,18 +8,39 @@ class PagePIM(BasePage):
         self.driver = driver
         self.response = {}  # Update this variable if you want return value
 
+    @logg
     def enter_employee_firstname(self, firstname: str = None):
-        firstname = 'fake' if not firstname else firstname
-
         self.find_element_heavy(locators.loc_txt_firstName).send_keys(firstname)
 
-        self.response['firstname'] = firstname
+        self.response['employee_firstname'] = firstname
         return self
 
-    def enter_password(self, password: str):
-        self.find_element_light(locators.loc_password).send_keys(password)
+    @logg
+    def enter_employee_middlename(self, middlename: str = None):
+        self.find_element_light(locators.loc_txt_middleName).send_keys(middlename)
+
+        self.response['middlename'] = middlename
         return self
 
-    def click_login(self):
-        self.find_element_light(locators.loc_login).click()
+    @logg
+    def enter_employee_lastname(self, lastname: str = None):
+        self.find_element_light(locators.loc_txt_lastName).send_keys(lastname)
+
+        self.response['lastname'] = lastname
+        return self
+
+    @logg
+    def enter_employee_id(self, employee_id: str):
+        self.find_element_light(locators.loc_txt_employeeId).send_keys(employee_id)
+        self.response['employee_id'] = employee_id
+        return self
+
+    @logg
+    def click_save(self):
+        self.find_element_light(locators.loc_btn_save).click()
+        return self
+
+    @logg
+    def click_add(self):
+        self.find_element_heavy(locators.loc_btn_add).click()
         return self

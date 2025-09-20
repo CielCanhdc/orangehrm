@@ -25,7 +25,7 @@ class Default:
     loc_txt_lastName = 'input[name="lastName"]'
 
     loc_txt_employeeId = '//label[text()="Employee Id"]/../following-sibling::div/input'
-    loc_tos_toastMessage = ''
+    loc_btn_save = 'button[type=submit]'
 
 
 class Staging(Default):

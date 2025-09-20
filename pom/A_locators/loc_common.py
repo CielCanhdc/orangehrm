@@ -19,15 +19,11 @@ from config import Config
 
 
 class Default:
-    loc_mnu_menuItem = '//*[contains(@class, "oxd-main-menu-item--name") and normalize-space(text()) = "%s"]'  # Format menu item name
-    loc_mnu_topBarItem = '//*[@class = "oxd-topbar-body-nav-tab-item" and normalize-space(text()) = "%s"]'
+    loc_mnu_menuItem = '//*[contains(@class, "oxd-main-menu-item--name") and normalize-space(.) = "%s"]'  # Format menu item name
+    loc_mnu_topBarItem = '//*[@class = "oxd-topbar-body-nav-tab-item" and normalize-space(.) = "%s"]'
     loc_mnu_topBarSubItem = '//*[@class = "oxd-dropdown-menu" and descendant::text() = "%s"]'
 
-    loc_txt_middleName = 'input[name="middleName"]'
-    loc_txt_lastName = 'input[name="lastName"]'
-
-    loc_txt_employeeId = '//label[text()="Employee Id"]/../following-sibling::div/input'
-    loc_tos_toastMessage = ''
+    loc_tos_toastMessage = '#oxd-toaster_1 .oxd-text--toast-message'
 
 
 class Staging(Default):

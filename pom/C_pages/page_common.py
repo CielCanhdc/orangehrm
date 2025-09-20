@@ -17,3 +17,15 @@ class PageCommon(BasePage):
         if not sub_menu_item:
             self.find_element_heavy(locators.loc_mnu_topBarSubItem % sub_menu_item).click()
         return self
+
+    @logg
+    def verify_toast_message(self, message):
+        # self.response['toast_message'] = ''
+        self.response['toast_message'] = self.find_element_heavy(locators.loc_tos_toastMessage).text
+        # try:
+        #
+        # except Exception as e:
+        #     pass
+
+        check.is_in(message, self.response['toast_message'])
+        return self
