@@ -14,6 +14,7 @@ cbo  Combo box
 tmr  Timer
 tos  Toast
 dpd  Dropdown
+opt  Option
 """
 from config import Config
 
@@ -24,6 +25,17 @@ class Default:
     loc_mnu_topBarSubItem = '//*[@class = "oxd-dropdown-menu" and descendant::text() = "%s"]'
 
     loc_tos_toastMessage = '#oxd-toaster_1 .oxd-text--toast-message'
+
+    loc_txt_inSearchTextBox = '//*[contains(@class, "oxd-input-group") and child::label[text() = "%s"]]/following-sibling::*//input'
+    loc_dpd_inSearchSelectBox = '//*[contains(@class, "oxd-input-group") and child::label[text() = "%s"]]/following-sibling::*'
+    loc_opt_inSearchSelectOption = '//*[@role="option" and child::*[text()="%s"]]'
+
+    loc_btn_search = '//button[normalize-space(.)="Search"]'
+    loc_btn_reset = '//button[normalize-space(.)="Reset"]'
+
+    loc_lbl_tableHeaders = '[role="columnheader"]'
+    loc_tbl_tableRows = '.oxd-table-body [role=row]'
+    loc_tbl_tableCells = '[role=cell]'
 
 
 class Staging(Default):

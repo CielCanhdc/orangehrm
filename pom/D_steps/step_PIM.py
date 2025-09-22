@@ -6,7 +6,11 @@ from utils.dummy import fake_employee_info
 class StepPIM(PageCommon, PagePIM):
 
     def __init__(self, driver):
-        super().__init__(driver)
+        PageCommon.__init__(self, driver)
+        self.resCommon = self.response
+
+        PagePIM.__init__(self, driver)
+        self.resPIM = self.response
         self.driver = driver
 
     @logg
@@ -27,3 +31,11 @@ class StepPIM(PageCommon, PagePIM):
          )
 
         self.verify_toast_message('Successfully Saved')
+
+        self.click_top_bar_by_name(menu_item='Employee List')
+        self.search_filter({"Employee Name": self.resPIM['lastname']})
+
+        self.get_table_headers()
+        self.get_table()
+
+

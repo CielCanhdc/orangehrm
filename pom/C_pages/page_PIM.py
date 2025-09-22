@@ -31,7 +31,9 @@ class PagePIM(BasePage):
 
     @logg
     def enter_employee_id(self, employee_id: str):
-        self.find_element_light(locators.loc_txt_employeeId).send_keys(employee_id)
+        element = self.find_element_light(locators.loc_txt_employeeId)
+        element.clear()
+        element.send_keys(employee_id)
         self.response['employee_id'] = employee_id
         return self
 
