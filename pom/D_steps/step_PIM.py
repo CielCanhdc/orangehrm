@@ -6,12 +6,12 @@ from utils.dummy import fake_employee_info
 class StepPIM(PageCommon, PagePIM):
 
     def __init__(self, driver):
-        PageCommon.__init__(self, driver)
-        self.resCommon = self.response
-
-        PagePIM.__init__(self, driver)
-        self.resPIM = self.response
-        self.driver = driver
+        super().__init__(driver)
+        # self.resCommon = self.response
+        #
+        # PagePIM.__init__(self, driver)
+        # self.resPIM = self.response
+        # self.driver = driver
 
     @logg
     def step_create_a_basic_employee(self, basic_employee: dict = None):
@@ -38,4 +38,7 @@ class StepPIM(PageCommon, PagePIM):
         self.get_table_headers()
         self.get_table()
 
-
+        lastname_table_index = self.response['table_header'].index('Last Name')
+        data_column = list(map(lambda i: i[lastname_table_index], self.response['data_table']))
+        for it in data_column:
+            assert self.resPIM['lastname'] in it

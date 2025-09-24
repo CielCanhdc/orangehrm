@@ -16,7 +16,7 @@ class PageCommon(BasePage):
 
     @logg
     def click_top_bar_by_name(self, menu_item: str, sub_menu_item: str = None):
-        self.find_element_light(locators.loc_mnu_topBarItem % menu_item).click()
+        self.find_element_heavy(locators.loc_mnu_topBarItem % menu_item).click()
         if sub_menu_item:
             self.find_element_heavy(locators.loc_mnu_topBarSubItem % sub_menu_item).click()
         return self
@@ -42,6 +42,7 @@ class PageCommon(BasePage):
             self.find_element_heavy(locators.loc_opt_inSearchSelectOption % value).click()
         elif fields_type[key] == FieldTypes.DATE:
             pass
+        return self
 
     @logg
     def search_filter(self, search_payload: dict = None):
@@ -50,12 +51,14 @@ class PageCommon(BasePage):
                 self.input_search_by_dealer(item)
 
             self.find_element_light(locators.loc_btn_search).click()  # Click search
+            self.response['search_filter'] = search_payload
         return self
 
     @logg
     def get_table_headers(self):
         self.response['table_header'] = list(map(lambda i: i.text,
-                                                 self.find_elements_light(locators.loc_lbl_tableHeaders)))
+                                                 self.find_elements_heavy(locators.loc_lbl_tableHeaders)))
+        return self
 
     @logg
     def get_table(self, page: int = 0):
@@ -63,6 +66,7 @@ class PageCommon(BasePage):
         data_table = []
         for row in rows:
             data_table.append(list(map(lambda i: i.text,
-                                       row.find_element(locators.loc_tbl_tableCells))))
+                                       row.find_elements(*self.classify_locator(locators.loc_tbl_tableCells)))))
 
         self.response['data_table'] = data_table
+        return self

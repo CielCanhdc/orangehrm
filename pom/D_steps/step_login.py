@@ -7,7 +7,6 @@ class StepLogin(PageCommon, PageLogin):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver = driver
 
     def step_login_successfully(self, authentication_info: dict = None):
         authentication_info = {} if not authentication_info else authentication_info
