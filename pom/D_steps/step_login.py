@@ -8,7 +8,7 @@ class StepLogin(PageCommon, PageLogin):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def step_login_successfully(self, authentication_info: dict = None):
+    def step_login(self, authentication_info: dict = None):
         authentication_info = {} if not authentication_info else authentication_info
         data = default_admin_authentication()
         data.update(authentication_info)

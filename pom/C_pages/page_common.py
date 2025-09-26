@@ -1,6 +1,8 @@
 from pom.C_pages import *
 from pom.A_locators.loc_common import locators
 from utils.constant import fields_type, FieldTypes
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class PageCommon(BasePage):
@@ -28,6 +30,7 @@ class PageCommon(BasePage):
         check.is_in(message, self.response['toast_message'])
         return self
 
+    @logg
     def input_search_by_dealer(self, item: dict[str, str]):
         """
         item = {"Employee Name": "test name"}
@@ -66,7 +69,10 @@ class PageCommon(BasePage):
         data_table = []
         for row in rows:
             data_table.append(list(map(lambda i: i.text,
-                                       row.find_elements(*self.classify_locator(locators.loc_tbl_tableCells)))))
+                                       WebDriverWait(row, 10).until(
+                                           EC.presence_of_all_elements_located(
+                                               self.classify_locator(locators.loc_tbl_tableCells)))
+                                       )))
 
         self.response['data_table'] = data_table
         return self
