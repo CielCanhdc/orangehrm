@@ -1,5 +1,6 @@
 import functools
 import logging
+from utils import current_test_id
 from utils.logg import logg
 from jira import JIRA
 
@@ -8,11 +9,15 @@ def jira_decorator(test_id: str):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            if test_id:
-                logging.info(f'---------------- {test_id} ----------------')
-            result = func(*args, **kwargs)
-            logging.info("Uploaded test result into Jira")
-            return result
+            logging.info(f'---------------- {test_id} ----------------')
+            token = current_test_id.set(test_id)
+            try:
+                result = func(*args, **kwargs)
+                logging.info(f"[{test_id}] Uploaded test result into Jira")
+                return result
+            finally:
+                if token:
+                    current_test_id.reset(token)
         return wrapper
     return decorator
 

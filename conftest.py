@@ -1,4 +1,5 @@
 import pytest
+import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -35,3 +36,13 @@ def driver_for_grid(request):
     driver.get(Config.BASE_URL)
     yield driver
     driver.quit()
+
+
+def pytest_configure(config):
+    logging.basicConfig(
+        filename="report/logs_all.log",
+        filemode="a",  # append, not overwrite
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s:> %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
