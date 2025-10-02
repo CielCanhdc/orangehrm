@@ -29,8 +29,9 @@ class PageLogin(BasePage):
         actual_message = self.find_element_heavy(locators.loc_login_error_msg).text
         self.response['actual_message'] = actual_message
 
-        check.equal(actual_message, message, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
-        # return self
+        # check.equal(actual_message, message, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
+        assert actual_message == message, f"The message is wrong :> {actual_message}"
+        return self
 
     @logg
     def verify_login_successfully(self) -> None:

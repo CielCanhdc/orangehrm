@@ -10,3 +10,8 @@
 - write how to run in selenium grid
 - write how to run in docker-selenium-grid
 - Research how to push testcase result to JIRA system
+
+
+
+commands:
+-     pytest <file_path> --html=report.html --self-contained-html  (embed css within report html)
