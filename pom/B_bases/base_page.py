@@ -44,16 +44,14 @@ class BasePage(ABC):
                 return self.driver.find_element(*self.classify_locator(main_locator))
             except NoSuchElementException as e:
                 logging.error(f"Element '{self.classify_locator(main_locator)}' not found")
-        else:
-            if backup_locator:
-                for loc in backup_locator:
-                    try:
-                        return self.driver.find_element(*self.classify_locator(loc))
-                    except NoSuchElementException as e:
-                        logging.error(f"Backup element '{loc}' not found")
-                else:
-                    raise
-            raise
+
+        if backup_locator:
+            for loc in backup_locator:
+                try:
+                    return self.driver.find_element(*self.classify_locator(loc))
+                except NoSuchElementException as e:
+                    logging.error(f"Backup element '{loc}' not found")
+        raise
 
     def find_elements_light(self, main_locator, *backup_locator):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
@@ -61,16 +59,14 @@ class BasePage(ABC):
                 return self.driver.find_elements(*self.classify_locator(main_locator))
             except NoSuchElementException as e:
                 logging.error(f"Elements '{main_locator}' not found")
-        else:
-            if backup_locator:
-                for loc in backup_locator:
-                    try:
-                        return self.driver.find_elements(*self.classify_locator(loc))
-                    except NoSuchElementException as e:
-                        logging.error(f"Backup elements '{loc}' not found")
-                else:
-                    raise
-            raise
+        if backup_locator:
+            for loc in backup_locator:
+                try:
+                    return self.driver.find_elements(*self.classify_locator(loc))
+                except NoSuchElementException as e:
+                    logging.error(f"Backup elements '{loc}' not found")
+
+        raise
 
     def find_element_heavy(self, main_locator, *backup_locator):
         """
@@ -81,16 +77,14 @@ class BasePage(ABC):
                 return self.wait.until(EC.presence_of_element_located(self.classify_locator(main_locator)))
             except NoSuchElementException as e:
                 logging.error(f"Element '{main_locator}' not found")
-        else:
-            if backup_locator:
-                for loc in backup_locator:
-                    try:
-                        return self.wait.until(EC.presence_of_element_located(self.classify_locator(loc)))
-                    except NoSuchElementException as e:
-                        logging.error(f"Backup element '{loc}' not found")
-                else:
-                    raise
-            raise
+
+        if backup_locator:
+            for loc in backup_locator:
+                try:
+                    return self.wait.until(EC.presence_of_element_located(self.classify_locator(loc)))
+                except NoSuchElementException as e:
+                    logging.error(f"Backup element '{loc}' not found")
+        raise
 
     def find_elements_heavy(self, main_locator, *backup_locator):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
@@ -98,13 +92,11 @@ class BasePage(ABC):
                 return self.wait.until(EC.presence_of_all_elements_located(self.classify_locator(main_locator)))
             except NoSuchElementException as e:
                 logging.error(f"Element '{main_locator}' not found")
-        else:
-            if backup_locator:
-                for loc in backup_locator:
-                    try:
-                        return self.wait.until(EC.presence_of_all_elements_located(self.classify_locator(loc)))
-                    except NoSuchElementException as e:
-                        logging.error(f"Backup element '{loc}' not found")
-                else:
-                    raise
-            raise
+
+        if backup_locator:
+            for loc in backup_locator:
+                try:
+                    return self.wait.until(EC.presence_of_all_elements_located(self.classify_locator(loc)))
+                except NoSuchElementException as e:
+                    logging.error(f"Backup element '{loc}' not found")
+        raise
