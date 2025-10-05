@@ -31,10 +31,11 @@ class PageLogin(BasePage):
 
         # check.equal(actual_message, message, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
         assert actual_message == message, f"The message is wrong :> {actual_message}"
-        return self
+        # return self
 
     @logg
     def verify_login_successfully(self) -> None:
         self.find_element_heavy(locators.loc_home_page)
-        check.is_in(Routes.DASHBOARD, self.driver.current_url, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
+        assert Routes.DASHBOARD in self.driver.current_url, "Home page dashboard not found"
+        # check.is_in(Routes.DASHBOARD, self.driver.current_url, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
         # return self

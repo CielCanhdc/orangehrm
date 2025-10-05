@@ -25,6 +25,10 @@ def logg(func: F) -> F:
             result_log = result if isinstance(result, (int, float, str, bool, type(None))) else getattr(result, "response", result)
             logging.info(f"{prefix}|{func.__module__}|{func.__name__}|{payload}| Return: {result_log}")
             return result
+        except AssertionError as e:
+            logging.error(f"{prefix}|{func.__module__}|{func.__name__}|{payload}| Assertion failed: {e}")
+            raise
         except Exception as e:
             logging.error(f"{prefix}|{func.__module__}|{func.__name__}|{payload}| Error: {e}")
+            raise
     return cast(F, wrapper)
