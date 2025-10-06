@@ -18,23 +18,16 @@ class StepPIM(PagePIM):
 
         self.common.click_menu_by_name(menu_item='PIM')
 
-        (self
-         .click_add()
-         .enter_employee_firstname(data['firstname'])
-         .enter_employee_middlename(data['middlename'])
-         .enter_employee_lastname(data['lastname'])
-         .enter_employee_id(data['employee_id'])
-         .click_save()
-         )
+        self.click_add()\
+            .enter_employee_firstname(data['firstname']).enter_employee_middlename(data['middlename'])\
+            .enter_employee_lastname(data['lastname']).enter_employee_id(data['employee_id']).click_save()
 
-        (self.common
-         .click_top_bar_by_name(menu_item='Employee List')
-         .search_filter({"Employee Name": self.response['lastname']})
-         .get_table_headers()
-         .get_table())
-
-        logging.info(f"resCommon :> {self.common.response}")
-        logging.info(f"res PIM:> {self.response}")
+        self.common.click_top_bar_by_name(menu_item='Employee List')\
+            .search_filter({"Employee Name": self.response['lastname']})\
+            .get_table_headers().get_table()
+        #
+        # logging.info(f"resCommon :> {self.common.response}")
+        # logging.info(f"res PIM:> {self.response}")
 
 
         # lastname_table_index = self.response['table_header'].index('Last Name')

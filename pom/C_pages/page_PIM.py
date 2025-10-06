@@ -12,7 +12,7 @@ class PagePIM(BasePage):
     def enter_employee_firstname(self, firstname: str = None):
         self.find_element_heavy(locators.loc_txt_firstName).send_keys(firstname)
 
-        self.response['employee_firstname'] = firstname
+        self.response['firstname'] = firstname
         return self
 
     @logg

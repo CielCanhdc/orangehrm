@@ -1,7 +1,6 @@
-import pytest
-from utils.logg import logg
 from pom.B_bases.base_test import BaseTest
 from utils.jiraa import jiraa
+from utils import assertion
 
 
 class TestPIM(BaseTest):
@@ -15,4 +14,4 @@ class TestPIM(BaseTest):
         lastname_table_index = self.pim.common.response['table_header'].index('Last Name')
         data_column = list(map(lambda i: i[lastname_table_index], self.pim.common.response['data_table']))
         for it in data_column:
-            assert self.pim.response['lastname'] in it
+            assertion.is_in(self.pim.response['lastname'], it)

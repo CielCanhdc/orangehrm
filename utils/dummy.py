@@ -13,7 +13,7 @@ def default_admin_authentication():
 def fake_employee_info():
     return {
         'firstname': 'Canhdc',
-        'middlename': 'Cciel',
-        'lastname': 'C33333333333333333',
+        'middlename': 'ciel',
+        'lastname': 'Canh',
         'employee_id': '12343',
     }
