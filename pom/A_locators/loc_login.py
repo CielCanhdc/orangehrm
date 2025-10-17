@@ -39,7 +39,8 @@ class Staging(Default):
     loc_username = '[placeholder="Username"]'
 
 
-if Config.ENV_LOCATORS.lower() == 'staging':
-    locators = Staging()
-else:
-    locators = Default()
+map = {
+    'default': Default,
+    'staging': Staging
+}
+locators = map.get(Config.ENV_LOCATORS, Default)

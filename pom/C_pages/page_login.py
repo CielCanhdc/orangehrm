@@ -1,3 +1,4 @@
+import allure
 from pom.C_pages import *
 from pom.A_locators.loc_login import locators
 from config import Routes
@@ -11,16 +12,19 @@ class PageLogin(BasePage):
         self.response = {}  # Update this variable if you want return value
 
     @logg
+    @allure.step("Enter username: {username}")
     def enter_username(self, username: str):
         self.find_element_heavy(locators.loc_username).send_keys(username)
         return self
 
     @logg
+    @allure.step("Enter password: {password}")
     def enter_password(self, password: str):
         self.find_element_light(locators.loc_password).send_keys(password)
         return self
 
     @logg
+    @allure.step("Click login button")
     def click_login(self):
         self.find_element_light(locators.loc_login).click()
         return self

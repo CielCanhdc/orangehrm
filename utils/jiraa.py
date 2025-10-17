@@ -2,7 +2,7 @@ import functools
 import logging
 from utils import current_test_id
 from utils.logg import logg
-from jira import JIRA
+# from jira import JIRA
 
 
 def jira_decorator(test_id: str):

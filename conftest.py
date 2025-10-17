@@ -41,7 +41,7 @@ def driver_for_grid(request):
 
 
 def pytest_configure(config):
-    """Config ghi log vào file"""
+    """Set up logging"""
     today = datetime.now().strftime("%Y-%m-%d")
     log_filename = f"report/logs_{today}.log"
     logging.basicConfig(
@@ -51,6 +51,20 @@ def pytest_configure(config):
         format="%(asctime)s %(levelname)s:> %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
     )
+
+    #  Set up report types
+    if Config.USE_REPORT_HTML:
+        config.option.htmlpath = "report/report.html"
+        config.option.self_contained_html = True
+    if Config.USE_REPORT_ALLURE:
+        config.option.allure_report_dir = "report/allure-results"
+
+    # Setup num processes for pytest-xdist
+    config.option.numprocesses = Config.NUM_PROCESSES
+
+    # Set up others
+    config.option.disable_warnings = True
+    config.option.pythonwarnings = "ignore::DeprecationWarning"
 
 
 class MemoryLogHandler(logging.Handler):
