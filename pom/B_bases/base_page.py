@@ -2,6 +2,8 @@ import logging
 import pytest
 from urllib.parse import urljoin
 from abc import ABC
+
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
@@ -40,31 +42,33 @@ class BasePage(ABC):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
             try:
                 return self.driver.find_element(*self.classify_locator(main_locator))
-            except Exception as e:
-                logging.error(f"Element '{self.classify_locator(main_locator)}' not found")
+            except NoSuchElementException as e:
+                pass
 
         if backup_locator:
             for loc in backup_locator:
                 try:
                     return self.driver.find_element(*self.classify_locator(loc))
-                except Exception as e:
-                    logging.error(f"Backup element '{loc}' not found")
-        pytest.fail(ErrorCode.ELEMENT_NOT_FOUND)
+                except NoSuchElementException as e:
+                    pass
+        raise Exception(f"Element '{self.classify_locator(main_locator)}' not found")
 
     def find_elements_light(self, main_locator, *backup_locator):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
             try:
                 return self.driver.find_elements(*self.classify_locator(main_locator))
-            except Exception as e:
-                logging.error(f"Elements '{main_locator}' not found")
-
+            except NoSuchElementException as e:
+                pass
+                # logging.error(f"Elements '{main_locator}' not found")
         if backup_locator:
             for loc in backup_locator:
                 try:
                     return self.driver.find_elements(*self.classify_locator(loc))
-                except Exception as e:
-                    logging.error(f"Backup elements '{loc}' not found")
-        pytest.fail(ErrorCode.ELEMENT_NOT_FOUND)
+                except NoSuchElementException as e:
+                    pass
+                    # logging.error(f"Backup elements '{loc}' not found")
+
+        raise Exception(f"Element '{self.classify_locator(main_locator)}' not found")
 
     def find_element_heavy(self, main_locator, *backup_locator):
         """
@@ -73,34 +77,45 @@ class BasePage(ABC):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
             try:
                 return self.wait.until(EC.presence_of_element_located(self.classify_locator(main_locator)))
-            except Exception as e:
-                logging.error(f"Element '{main_locator}' not found")
+            except NoSuchElementException as e:
+                # logging.error(f"Element '{main_locator}' not found")
+                pass
+            except TimeoutException as e:
+                # To prevent unnecessary exception like: E       0   chromedriver                        0x0000000104def274 cxxbridge1$str$ptr + 2882596
+                # logging.error(f"Find element '{main_locator}' time out")
+                pass
 
         if backup_locator:
             for loc in backup_locator:
                 try:
                     return self.wait.until(EC.presence_of_element_located(self.classify_locator(loc)))
-                except Exception as e:
-                    logging.error(f"Backup element '{loc}' not found")
-        pytest.fail(ErrorCode.ELEMENT_NOT_FOUND)
+                except NoSuchElementException as e:
+                    # logging.error(f"Backup element '{loc}' not found")
+                    pass
+                except TimeoutException as e:
+                    # logging.error(f"Find Backup element '{main_locator}' time out")
+                    pass
+        raise Exception(f"Element '{self.classify_locator(main_locator)}' not found")
 
     def find_elements_heavy(self, main_locator, *backup_locator):
         for _ in range(Config.RETRY_FIND_ELEMENT_TIMES):
             try:
                 return self.wait.until(EC.presence_of_all_elements_located(self.classify_locator(main_locator)))
-            except Exception as e:
-                logging.error(f"Element '{main_locator}' not found")
+            except NoSuchElementException as e:
+                # logging.error(f"Element '{main_locator}' not found")
+                pass
+            except TimeoutException as e:
+                # logging.error(f"Find element '{main_locator}' time out")
+                pass
 
         if backup_locator:
             for loc in backup_locator:
                 try:
                     return self.wait.until(EC.presence_of_all_elements_located(self.classify_locator(loc)))
-                except Exception as e:
-                    logging.error(f"Backup element '{loc}' not found")
-        pytest.fail(ErrorCode.ELEMENT_NOT_FOUND)
-
-    def get_title(self):
-        return self.driver.title
-
-    def refresh(self):
-        self.driver.refresh()
+                except NoSuchElementException as e:
+                    # logging.error(f"Backup element '{loc}' not found")
+                    pass
+                except TimeoutException as e:
+                    # logging.error(f"Find Backup element '{main_locator}' time out")
+                    pass
+        raise Exception(f"Element '{self.classify_locator(main_locator)}' not found")

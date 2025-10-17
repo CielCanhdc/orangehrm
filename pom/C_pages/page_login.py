@@ -1,6 +1,7 @@
 from pom.C_pages import *
 from pom.A_locators.loc_login import locators
 from config import Routes
+from utils import assertion
 
 
 class PageLogin(BasePage):
@@ -27,14 +28,12 @@ class PageLogin(BasePage):
     @logg
     def verify_login_error_message(self, message: str) -> None:
         actual_message = self.find_element_heavy(locators.loc_login_error_msg).text
-        self.response['actual_message'] = actual_message
 
-        # check.equal(actual_message, message, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
-        assert actual_message == message, f"The message is wrong :> {actual_message}"
+        assertion.equal(actual_message, message)
         return self
 
     @logg
     def verify_login_successfully(self) -> None:
         self.find_element_heavy(locators.loc_home_page)
-        check.is_in(Routes.DASHBOARD, self.driver.current_url, msg=AssertionMsg.LOGIN_FAIL_MESSAGE)
-        # return self
+        assertion.is_in(Routes.DASHBOARD, self.driver.current_url, "Home page dashboard not found")
+        return self

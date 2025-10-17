@@ -9,6 +9,8 @@ class Config:
     IMPLICIT_WAIT_TIME = 1  # use in base page
     RETRY_TEST_FAILURE = 0  # Config in pytest.ini
 
+    SCREENSHOT_FAILURE = True
+
 
 class Routes:
     LOGIN = 'web/index.php/auth/login'
