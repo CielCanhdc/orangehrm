@@ -23,7 +23,7 @@ def init_driver(request):
     driver.quit()
 
 
-@pytest.fixture(scope='function', params=Config.BROWSERS)
+@pytest.fixture(scope='function', params=Config.browsers)
 def driver_for_grid(request):
     browser = request.param
     if browser == "chrome":
@@ -33,9 +33,9 @@ def driver_for_grid(request):
     else:
         raise ErrorCode.BROWSER_NOT_FOUND
 
-    driver = webdriver.Remote(command_executor=Grid.GRID_URL, options=options)
+    driver = webdriver.Remote(command_executor=Grid.gridUrl, options=options)
 
-    driver.get(Config.BASE_URL)
+    driver.get(Config.baseUrl)
     yield driver
     driver.quit()
 
@@ -53,15 +53,15 @@ def pytest_configure(config):
     )
 
     #  Set up report types
-    if Config.USE_REPORT_HTML:
-        config.option.htmlpath = "report/report.html"
+    if Config.useReportHtml:
+        config.option.htmlpath = Config.reportHtmlPath
         config.option.self_contained_html = True
-    if Config.USE_REPORT_ALLURE:
-        config.option.allure_report_dir = "report/allure-results"
+    if Config.useReportAllure:
+        config.option.allure_report_dir = Config.reportAllureDir
 
     # Setup num processes for pytest-xdist
-    config.option.numprocesses = Config.NUM_PROCESSES
-
+    config.option.numprocesses = Config.numProcesses
+    config.option.rerunfailed = Config.retryTestFailed
     # Set up others
     config.option.disable_warnings = True
     config.option.pythonwarnings = "ignore::DeprecationWarning"
@@ -95,7 +95,7 @@ def capture_logs_per_test(request):
     # print("\n------ Captured logs (from logger) ------")
     # for line in handler.logs:
     #     print(line)
-    print(handler.logs)
+    # print(handler.logs)
     logger.removeHandler(handler)
 
 

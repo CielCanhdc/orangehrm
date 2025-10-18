@@ -1,25 +1,26 @@
 class Config:
-    BASE_URL = 'https://opensource-demo.orangehrmlive.com/'
-    BROWSERS = ['chrome', 'firefox']
-    HEADLESS = False
-    ENV_LOCATORS = 'default'  # Locator by environment: "Default | Staging" based on class name in A_locator classes
+    baseUrl: str = 'https://opensource-demo.orangehrmlive.com/'
+    browsers: list = ['chrome', 'firefox']
+    headless: bool = False
+    envLocator: str = 'default'  # Locator by environment: "Default | Staging" based on class name in A_locator classes
+    numProcesses: int = 0  # <= Can not be use. it just store. please config in pytest.ini - addopts
+    retryTestFailed: int = 0  # Config in pytest.ini
 
-    USE_REPORT_HTML = True
-    USE_REPORT_ALLURE = False
+    useReportHtml: bool = False
+    useReportAllure: bool = True
+    reportHtmlPath: str = 'report/report.html'
+    reportAllureDir: str = 'report/allure-results'
 
-    NUM_PROCESSES = 2  # for pytest-xdist
-    RETRY_FIND_ELEMENT_TIMES = 3  # second. use in base page
-    EXPLICIT_WAIT_TIME = 10  # use in base page
-    IMPLICIT_WAIT_TIME = 1  # use in base page
-    RETRY_TEST_FAILURE = 0  # Config in pytest.ini
-
-    SCREENSHOT_FAILURE = True
+    retryFindElementTimes: int = 3  # second. use in base page
+    explicitWait: int = 10  # use in base page
+    implicitWait: int = 1  # use in base page
+    screenshotFailure: bool = True
 
 
 class Routes:
-    LOGIN = 'web/index.php/auth/login'
-    DASHBOARD = 'web/index.php/dashboard/index'
+    login = 'web/index.php/auth/login'
+    dashboard = 'web/index.php/dashboard/index'
 
 
 class Grid:
-    GRID_URL = 'http://localhost:4444/wd/hub'
+    gridUrl = 'http://localhost:4444/wd/hub'

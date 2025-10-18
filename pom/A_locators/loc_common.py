@@ -53,4 +53,4 @@ map = {
     'default': Default,
     'staging': Staging
 }
-locators = map.get(Config.ENV_LOCATORS, Default)
+locators = map.get(Config.envLocator, Default)

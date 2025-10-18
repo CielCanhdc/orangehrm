@@ -4,7 +4,7 @@ from config import Config
 
 
 def screenshot_failure(item):
-    if Config.SCREENSHOT_FAILURE:
+    if Config.screenshotFailure:
         # Create screenshot folder
         screenshots_dir = os.path.join("report", "screenshots")
         os.makedirs(screenshots_dir, exist_ok=True)
@@ -23,6 +23,5 @@ def screenshot_failure(item):
             return screenshot_report_path
         except Exception as e:
             print(f"\n⚠️ Failed to take screenshot: {e}")
-
 
     return None

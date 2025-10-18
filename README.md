@@ -15,3 +15,7 @@
 
 commands:
 -     pytest <file_path> --html=report.html --self-contained-html  (embed css within report html)
+
+Report allure
+-    pytest <file_path> --alluredir=<report_folder>
+-    allure serve <report_folder>  (to view report)
