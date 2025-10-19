@@ -1,3 +1,4 @@
+import allure
 from pom.D_steps import *
 from pom.C_pages.page_login import PageLogin
 from utils.dummy import default_admin_authentication
@@ -8,6 +9,7 @@ class StepLogin(PageCommon, PageLogin):
     def __init__(self, driver):
         super().__init__(driver)
 
+    @allure.step("Step: Log in")
     def step_login(self, authentication_info: dict = None):
         authentication_info = {} if not authentication_info else authentication_info
         data = default_admin_authentication()

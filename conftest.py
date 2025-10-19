@@ -59,8 +59,6 @@ def pytest_configure(config):
     if Config.useReportAllure:
         config.option.allure_report_dir = Config.reportAllureDir
 
-    # Setup num processes for pytest-xdist
-    config.option.numprocesses = Config.numProcesses
     config.option.rerunfailed = Config.retryTestFailed
     # Set up others
     config.option.disable_warnings = True
