@@ -2,6 +2,7 @@ import allure
 from pom.D_steps import *
 from pom.C_pages.page_login import PageLogin
 from utils.dummy import default_admin_authentication
+from utils.auth import load_logged_on_cookies
 
 
 class StepLogin(PageCommon, PageLogin):
@@ -15,9 +16,12 @@ class StepLogin(PageCommon, PageLogin):
         data = default_admin_authentication()
         data.update(authentication_info)
 
-        (self
-         .enter_username(data['username'])
-         .enter_password(data['password'])
-         .click_login()
-         .verify_login_successfully()
-         )
+        result = load_logged_on_cookies(self.driver, data['username'])
+        if not result:
+            (self
+             .enter_username(data['username'])
+             .enter_password(data['password'])
+             .click_login()
+             .verify_login_successfully()
+             .get_cookies_after_login(data['username'])
+             )

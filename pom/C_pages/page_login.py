@@ -3,6 +3,7 @@ from pom.C_pages import *
 from pom.A_locators.loc_login import locators
 from config import Routes
 from utils import assertion
+from utils.auth import save_logged_on_cookies
 
 
 class PageLogin(BasePage):
@@ -32,7 +33,7 @@ class PageLogin(BasePage):
 
     @logg
     @allure.step("verify login error")
-    def verify_login_error_message(self, message: str) -> None:
+    def verify_login_error_message(self, message: str):
         actual_message = self.find_element_heavy(locators.loc_login_error_msg).text
 
         assertion.equal(actual_message, message)
@@ -40,7 +41,10 @@ class PageLogin(BasePage):
 
     @logg
     @allure.step("verify login successfully")
-    def verify_login_successfully(self) -> None:
+    def verify_login_successfully(self):
         self.find_element_heavy(locators.loc_home_page)
         assertion.is_in(Routes.dashboard, self.driver.current_url, "Home page dashboard not found")
         return self
+
+    def get_cookies_after_login(self, username):
+        save_logged_on_cookies(self.driver, username)
