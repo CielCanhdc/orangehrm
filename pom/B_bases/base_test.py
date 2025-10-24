@@ -12,3 +12,5 @@ class BaseTest(ABC):
         self.login = StepLogin(self.driver)
         self.pim = StepPIM(self.driver)
         self.login.goto()
+        yield
+        # write tear down here

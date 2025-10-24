@@ -1,10 +1,11 @@
+import os
 import pytest
 import logging
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from config import Config, Grid
+from config import Config, Grid, Path
 from utils.constant import ErrorCode
 from utils.screenshot import screenshot_failure
 
@@ -43,7 +44,7 @@ def driver_for_grid(request):
 def pytest_configure(config):
     """Set up logging"""
     today = datetime.now().strftime("%Y-%m-%d")
-    log_filename = f"report/logs_{today}.log"
+    log_filename = os.path.join(Path.root, f"report/logs_{today}.log")
     logging.basicConfig(
         filename=log_filename,
         filemode="a",  # append, not overwrite
@@ -54,10 +55,10 @@ def pytest_configure(config):
 
     #  Set up report types
     if Config.useReportHtml:
-        config.option.htmlpath = Config.reportHtmlPath
+        config.option.htmlpath = os.path.join(Path.root, Config.reportHtmlPath)
         config.option.self_contained_html = True
     if Config.useReportAllure:
-        config.option.allure_report_dir = Config.reportAllureDir
+        config.option.allure_report_dir = os.path.join(Path.root, Config.reportAllureDir)
 
     config.option.rerunfailed = Config.retryTestFailed
     # Set up others

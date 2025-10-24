@@ -4,3 +4,4 @@ __pycache__/
 report/*
 tests/report
 allure-report
+.auth

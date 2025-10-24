@@ -1,3 +1,6 @@
+import os
+
+
 class Config:
     baseUrl: str = 'https://opensource-demo.orangehrmlive.com/'
     browsers: list = ['chrome', 'firefox']
@@ -24,3 +27,7 @@ class Routes:
 
 class Grid:
     gridUrl = 'http://localhost:4444/wd/hub'
+
+
+class Path:
+    root = os.path.dirname(os.path.realpath(__file__))
