@@ -1,19 +1,11 @@
-version: '3.8'
-
+version: "3"
 services:
   mountebank:
-    # Xây dựng image từ Dockerfile trong thư mục hiện tại
     build: .
-    container_name: mountebank_service
-    restart: always
-    ports:
-      # Cổng 2525: Cổng quản lý mặc định của Mountebank (Mountebank UI & API)
-      - "2525:2525"
-      # Cổng 4545: Cổng của API giả lập (imposter)
-      - "4545:4545"
-    # Mount thư mục hiện tại để bạn có thể chỉnh sửa imposters.json mà không cần rebuild
+    container_name: mountebank
     volumes:
-      - ./imposters.json:/usr/src/app/imposters.json
-    environment:
-      # Tùy chọn: Thiết lập biến môi trường nếu cần
-      - NODE_ENV=development
+      - ./imposters:/imposters
+    ports:
+      - "2525:2525"
+      - "8090:8090"
+    command: --configfile /imposters/imposter.ejs --allowInjection
