@@ -1,0 +1,11 @@
+1. Use the Playwright MCP Server + Cursor to navigate to https://www.saucedemo.com. All browser automation must be routed through the MCP Server. Do not simulate interactions or bypass the MCP in any part of the flow.
+2. On the login page, execute and validate the following two scenarios:
+Scenario 1: Valid Login
+Scenario 2: Locked Out User
+3. Scan the website to retrieve the credentials for both scenarios. Between both scenarios please logout to avoid cache issues.
+4.After both scenarios are executed and validated
+5.Close the browser.
+6. Allow the MCP Server to complete the code generation.
+7.Use the code found in the temp_codegen folder as a reference.
+8.Transpile the test code to a Pytest framework using Python.
+9. Organize the Pytest project use the Page Object Model structure that describe in `project-structure.txt`.

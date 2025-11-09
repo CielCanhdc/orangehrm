@@ -1,0 +1,65 @@
+1. This is project directory structure for a Python-based test automation framework using pytest.
+- root
+    - pom
+        - A_locators
+            - loc_common.py
+            - loc_login.py
+            - loc_PIM.py
+        - B_bases
+            - base_page.py
+            - base_test.py
+        - C_pages
+            - page_common.py
+            - page_login.py
+            - page_PIM.py
+        - D_steps
+            - step_common.py
+            - step_login.py
+            - step_PIM.py
+   - tests
+     - test_login.py
+     - test_PIM.py
+   - utils
+     - assertion.py
+     - auth.py
+     - constant.py
+     - dummy.py
+     - logg.py
+     - screenshot.py
+   - config.py
+   - conftest.py
+   - pytest.ini
+
+1.1 Folder structure is organized by functionality:
+   - `pom`: Contains Page Object Model components, organized into locators, base classes, page classes, and step definitions.
+   - `tests`: Contains test cases for different modules.
+   - `utils`: Contains utility functions for assertions, authentication, constants, logging, and screenshots.
+
+1.2 Folder `pom` details:
+   - `A_locators`: Contains locator definitions for different pages.
+   - `B_bases`: Contains base classes for pages (base_page.py - wrap find_element methods) and tests (base_test.py - initial instance of Step classes).
+   - `C_pages`: Contains page classes that implement page-specific actions.
+   - `D_steps`: Contains step definitions that use page classes to perform actions in tests, step should include multiple small action within a screen in scenarios).
+1.3 Test files in `tests` folder:
+    - `test_login.py`: Contains test cases related to login functionality.
+    - `test_PIM.py`: Contains test cases related to PIM (Personal Information Management) functionality.
+1.4 Utility files in `utils` folder:
+    - `assertion.py`: Custom assertion methods.
+    - `auth.py`: Store cookies of previous session, load into current session to save the execution time.
+    - `constant.py`: Constant values used across the framework.
+    - `dummy.py`: Dummy data generation functions.
+    - `logg.py`: Logging setup and functions, used as a decorator in every small step in C_pages and D_steps folder.
+    - `screenshot.py`: Screenshot capture functions.
+1.5 Configuration files:
+    - `config.py`: Configuration settings for the project such as baseUrl, browsers, report type, wait time, etc.
+    - `conftest.py`: Pytest fixtures and hooks such as init_driver, logging configuration, report hook.
+    - `pytest.ini`: Pytest configuration file.
+
+
+2. The ways to add a new test case into project
+To add a new test case into the project, follow these steps:
+Step 1: If new locators are needed, create a new file in the `pom/A_locators` folder or add to an existing locator file.
+Step 2: If new page actions are needed, create a new file in the `pom/C_pages` folder or add to an existing page file.
+Step 3: If new step definitions are needed, create a new file in the `pom/D_steps` folder or add to an existing step file.
+Step 4: Create a new test file in the `tests` folder or add to an existing test file.
+
