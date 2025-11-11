@@ -6,6 +6,8 @@ services:
     volumes:
       - ./imposters:/imposters
     ports:
-      - "2525:2525"
+      - "2525:2525"  # for server
+      - "8091:8091"
       - "8090:8090"
+      - "8089:8089"
     command: --configfile /imposters/imposter.ejs --allowInjection

@@ -1,0 +1,60 @@
+{
+  "protocol": "http",
+  "port": 8090,
+  "name": "user_service",
+  "requests": [],
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "path": "/users",
+            "method": "GET"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body": [
+                { "id": 1, "name": "Canh", "age": 28 },
+                { "id": 2, "name": "Huy", "age": 30 }
+              ]
+          }
+        }
+      ]
+    },
+    {
+      "predicates": [
+        {
+          "equals": {
+            "path": "/user/create",
+            "method": "POST",
+            "body": {
+              "name": "Ciel"
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body": {
+              "id": 1,
+              "name": "Ciel",
+              "age": 19
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

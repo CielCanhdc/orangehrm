@@ -1,0 +1,44 @@
+{
+  "protocol": "http",
+  "port": 8091,
+  "name": "payment_service",
+  "requests": [],
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "equals": {
+            "path": "/payments",
+            "method": "GET"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "is": {
+            "status_code": 200,
+            "headers": {
+              "content-type": "application/json"
+            },
+            "body": [
+              {
+                "id": 1,
+                "userId": 2,
+                "paymentMethod": "Napas",
+                "amount": 200000,
+                "currency": "VN"
+              },
+              {
+                "id": 2,
+                "userId": 2,
+                "paymentMethod": "Napas",
+                "amount": 200000,
+                "currency": "VN"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
