@@ -1,0 +1,33 @@
+{
+  "port": 8089,
+  "protocol": "http",
+  "name": "Proxy Recorder",
+  "stubs": [
+    {
+      "predicates": [
+        {
+          "not": {
+            "equals": {
+              "path": ""
+            }
+          }
+        }
+      ],
+      "responses": [
+        {
+          "proxy": {
+            "to": "https://chain.fcmobile.garena.vn/",
+            "mode": "proxyOnce",
+            "addDecorators": true,
+            "injectHeaders": {
+              "Host": "chain.fcmobile.garena.vn"
+            },
+            "https": {
+                  "rejectUnauthorized": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
