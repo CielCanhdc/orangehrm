@@ -1,14 +1,18 @@
 import time
-
 import allure
 import pytest
-from utils.jiraa import jiraa
 from utils.logg import logg
 from pom.B_bases.base_test import BaseTest
 from utils import assertion
 
 
 class TestLogin(BaseTest):
+
+    @pytest.fixture(scope="class", autouse=True)
+    def setup_and_teardown(self):
+        print('precondition setup class here22')
+        yield
+        print('tear down class here')
 
     @logg
     @pytest.mark.parametrize('login_info', [{'username': 'Admin', 'password': 'admin123'}])

@@ -9,7 +9,7 @@ class Config:
     numProcesses: int = 0  # <= Can not be use. it just store. please config in pytest.ini - addopts
     retryTestFailed: int = 0  # Config in pytest.ini
 
-    useReportHtml: bool = False
+    useReportHtml: bool = True
     useReportAllure: bool = True
     reportHtmlPath: str = 'report/report.html'
     reportAllureDir: str = 'report/allure-results'
